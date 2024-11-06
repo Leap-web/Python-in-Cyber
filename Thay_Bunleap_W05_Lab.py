@@ -174,3 +174,79 @@ contact.display_contact()
 
 print(contact.find_contact("John"))
 print(contact.find_contact("Alice"))
+
+print("\nExercise 8")
+class SportLeague:
+    def __init__(self):
+        self.team = {}
+        self.player = {}
+
+    def add_team(self, team_name):
+        if team_name in self.team:
+            return "Team already exists"
+        self.team[team_name] = []
+        return f"Team '{team_name}' added"
+
+    def add_player(self, team_name, player_id, player_name, position):
+        if team_name in self.team:
+            self.team[team_name].append((player_id, player_name, position))
+            self.player[player_name] = team_name
+            return "Player '{}': added to team: '{}'.".format(player_name, team_name)
+        else:
+            return "Team does not exist"
+        
+    def view_team(self, team_name):
+        if team_name in self.team:
+            player_info = "Team: '{}' players: ".format(team_name)
+            for player in self.team[team_name]:
+                player_info += "\nID: {}, Name: {}, Position: {} ".format(player[0], player[1], player[2])
+            return player_info
+        else: 
+            return "Team does not exist"
+
+    def update_player(self, team_name, player_id, new_name=None, new_position=None):
+        if team_name in self.team:
+            for index, player in enumerate(self.team[team_name]):
+                if player[0] == player_id:
+                    if new_name:
+                        self.team[team_name][index] = (player_id, new_name, player[2])
+                        self.player[new_name] = team_name
+                        del self.player[player[1]]  # Remove old name from player dict
+                    if new_position:
+                        self.team[team_name][index] = (player_id, player[1], new_position)
+                    return "Player ID: {} updated in team '{}'.".format(player_id, team_name)
+            return "Player not found"
+        else:
+            return "Team does not exist"
+                
+    def remove_player(self, team_name, player_id):
+        if team_name in self.team:
+            for player in self.team[team_name]:
+                if player[0] == player_id:
+                    self.team[team_name].remove(player)
+                    del self.player[player[1]]
+                    return "Player: '{}' removed from team '{}'.".format(player[1], team_name)
+            return "Player not found."
+        else:
+            return "Team does not exist"
+        
+league = SportLeague()
+
+print(league.add_team("Tigers"))
+print(league.add_team("Sharks"))
+
+print(league.add_player("Tigers", 1, "John Doe", "Forward"))
+print(league.add_player("Tigers", 2, "Alice Smith", "Goalkeeper"))
+print(league.add_player("Sharks", 3, "Bob Brown", "Defender"))
+
+print("\nViewing teams:")
+print(league.view_team("Tigers"))
+print(league.view_team("Sharks"))
+
+print("\nUpdating player info:")
+print(league.update_player("Tigers", 1, new_name="Johnny Doe", new_position="Striker"))
+print(league.view_team("Tigers"))
+
+print("\nRemoving a player:")
+print(league.remove_player("Tigers", 2))  # Remove Alice Smith
+print(league.view_team("Tigers"))

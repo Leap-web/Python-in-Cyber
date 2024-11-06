@@ -6,7 +6,7 @@ class Car:
     year = 2024
     
     def display_info(self):
-        print("Car details")
+        print("Car details:")
         print("Make: {}".format(self.make))
         print("Model: {}".format(self.model))
         print("Year: {}".format(self.year))
@@ -46,7 +46,7 @@ class Student:
         print("Name: {}".format(self.name))
         print("Age: {}".format(self.age))
         print("Grade: {}".format(self.old_grade))
-        print("After grade updated: ")
+        print("\nAfter grade updated: ")
         print(f"Name: {self.name}")
         print(f"Age: {self.age}")
         print(f"Grade: {new_grade}")
@@ -88,6 +88,7 @@ Depositing.deposit(deposits)
 
 Withdraw = BankAccount()
 with_draw = (300)
+with_draw = (2000)
 Withdraw.withdraw(with_draw, deposits)
 
 print("\nExercise 5")
@@ -105,8 +106,8 @@ class Library(Book):
         self.books.append(book)
 
     def show_books(self):
-        for book in self.books:
-            print("Title: {}, Author: {}, Price: ${}".format(book.title, book.author, book.price))
+        for index,  book in enumerate(self.books, start=1):
+            print("{}. Title: {}, Author: {}, Price: ${}".format(index, book.title, book.author, book.price))
 
 library = Library()
 

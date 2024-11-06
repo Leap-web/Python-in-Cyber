@@ -1,8 +1,6 @@
 print("Thay_Bunleap_G2_W05")
 print("Exercise 1")
 class Car:
-
-    # Attribute
     make = "Toyota"
     model = "Corolla"
     year = 2024
@@ -35,7 +33,6 @@ Car_2 = Cars("BMW", "i8", 1997)
 
 Car_1.is_vintage("Car_1")
 Car_2.is_vintage("Car_2")
-
 
 print("\nExercise 3")
 class Student:
